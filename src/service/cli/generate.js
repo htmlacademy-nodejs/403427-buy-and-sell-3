@@ -58,7 +58,7 @@ module.exports = {
 
     if (countOffer > MAX_MOCK_ITEMS) {
       console.info(`Не больше ${MAX_MOCK_ITEMS} объявлений`);
-      process.exit(ExitCode.SUCCESS);
+      process.exit(ExitCode.FATAL_EXCEPTION);
     }
 
     const offers = generateOffers(countOffer);

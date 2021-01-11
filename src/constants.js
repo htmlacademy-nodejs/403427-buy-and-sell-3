@@ -3,6 +3,7 @@
 const DEFAULT_COUNT = 1;
 const USER_ARGV_INDEX = 2;
 const MOCK_FILE_NAME = `mocks.json`;
+const MAX_MOCK_ITEMS = 1000;
 
 const MOCK_TITLES = [
   `Продам книги Стивена Кинга`,
@@ -72,6 +73,7 @@ module.exports = {
   PictureRestrict,
   SentencesRestrict,
   OfferType,
+  MAX_MOCK_ITEMS,
   MOCK_CATEGORIES,
   MOCK_SENTENCES,
   MOCK_TITLES,
