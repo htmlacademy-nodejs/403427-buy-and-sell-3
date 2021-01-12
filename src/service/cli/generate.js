@@ -1,7 +1,7 @@
 'use strict';
 
 const chalk = require(`chalk`);
-const fs = require(`fs`);
+const fs = require(`fs`).promises;
 
 const {
   CliCommand,
@@ -40,7 +40,7 @@ const generateOffers = (count) => {
 
 const writeOffers = async (offers) => {
   try {
-    fs.writeFileSync(MOCK_FILE_NAME, JSON.stringify(offers));
+    await fs.writeFile(MOCK_FILE_NAME, JSON.stringify(offers));
   } catch (err) {
     console.info(chalk.red(`Ошибка при создании данных`, err));
     process.exit(ExitCode.FATAL_EXCEPTION);
