@@ -1,6 +1,7 @@
 'use strict';
 
-const fs = require(`fs`);
+const chalk = require(`chalk`);
+const fs = require(`fs`).promises;
 
 const {
   CliCommand,
@@ -38,15 +39,14 @@ const generateOffers = (count) => {
 };
 
 const writeOffers = async (offers) => {
-  fs.writeFile(MOCK_FILE_NAME, JSON.stringify(offers), (err) => {
-    if (err) {
-      console.info(`Ошибка при создании данных`);
-      process.exit(ExitCode.FATAL_EXCEPTION);
-    }
-
-    console.info(`Данные в количестве [${offers.length}] успешно сформированы в файл ${MOCK_FILE_NAME}`);
+  try {
+    await fs.writeFile(MOCK_FILE_NAME, JSON.stringify(offers));
+    console.info(chalk.green(`Данные в количестве [${offers.length}] успешно сформированы в файл ${MOCK_FILE_NAME}`));
     process.exit(ExitCode.SUCCESS);
-  });
+  } catch (err) {
+    console.info(chalk.red(`Ошибка при создании данных`, err));
+    process.exit(ExitCode.FATAL_EXCEPTION);
+  }
 };
 
 module.exports = {
@@ -57,7 +57,7 @@ module.exports = {
     const countOffer = count && count > 0 ? count : DEFAULT_GENERATE_COUNT;
 
     if (countOffer > MAX_MOCK_ITEMS) {
-      console.info(`Не больше ${MAX_MOCK_ITEMS} объявлений`);
+      console.info(chalk.red(`Не больше ${MAX_MOCK_ITEMS} объявлений`));
       process.exit(ExitCode.FATAL_EXCEPTION);
     }
 
