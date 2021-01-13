@@ -41,7 +41,10 @@ const generateOffers = async (count, titles, categories, sentences) => {
 const readContent = async (filePath) => {
   try {
     const content = await fs.readFile(filePath, `utf8`);
-    const result = content.trim().split(`\n`);
+    const result = content.trim()
+                          .split(`\n`)
+                          .map((el) => el.trim())
+                          .filter((el) => el);
     console.info(chalk.green(`Данные в количестве ${result.length} фраз успешно считаны`));
     return result;
   } catch (err) {
