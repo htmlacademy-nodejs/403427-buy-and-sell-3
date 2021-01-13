@@ -41,12 +41,12 @@ const generateOffers = (count) => {
 const writeOffers = async (offers) => {
   try {
     await fs.writeFile(MOCK_FILE_NAME, JSON.stringify(offers));
+    console.info(chalk.green(`Данные в количестве [${offers.length}] успешно сформированы в файл ${MOCK_FILE_NAME}`));
+    process.exit(ExitCode.SUCCESS);
   } catch (err) {
     console.info(chalk.red(`Ошибка при создании данных`, err));
     process.exit(ExitCode.FATAL_EXCEPTION);
   }
-  await console.info(chalk.green(`Данные в количестве [${offers.length}] успешно сформированы в файл ${MOCK_FILE_NAME}`));
-  await process.exit(ExitCode.SUCCESS);
 };
 
 module.exports = {
