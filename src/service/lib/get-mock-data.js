@@ -11,8 +11,7 @@ const getMockData = async () => {
 
   try {
     const fileContent = await fs.readFile(FILENAME);
-    const buf = Buffer.from(JSON.stringify(fileContent));
-    data = JSON.parse(buf.toString());
+    data = JSON.parse(fileContent);
   } catch (err) {
     console.log(err);
     return Promise.reject(err);
@@ -20,5 +19,14 @@ const getMockData = async () => {
 
   return Promise.resolve(data);
 };
+
+(async () => {
+  try {
+    const fileContent = await fs.readFile(FILENAME);
+    data = JSON.parse(fileContent);
+  } catch (err) {
+    console.log(err);
+  }
+})();
 
 module.exports = getMockData;

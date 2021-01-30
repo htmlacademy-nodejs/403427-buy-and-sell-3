@@ -3,7 +3,6 @@
 class CategoryService {
   constructor(offers) {
     this._offers = offers;
-    console.log(`offers--->`, offers);
   }
 
   findAll() {
