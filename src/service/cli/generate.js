@@ -2,6 +2,7 @@
 
 const chalk = require(`chalk`);
 const fs = require(`fs`).promises;
+const {nanoid} = require(`nanoid`);
 
 const {
   CliCommand,
@@ -10,12 +11,15 @@ const {
   FILE_TITLES_PATH,
   FILE_CATEGORIES_PATH,
   FILE_SENTENCES_PATH,
+  FILE_COMMENTS_PATH,
   MAX_MOCK_ITEMS,
+  MAX_COMMENTS,
   OfferType,
   SumRestrict,
   PictureRestrict,
   SentencesRestrict,
-  ExitCode
+  ExitCode,
+  MAX_ID_LENGTH
 } = require(`../../constants`);
 
 const {
@@ -27,16 +31,27 @@ const getPictureFileName = (number) => {
   return number < 10 ? `item0${number}.jpg` : `item${number}.jpg`;
 };
 
-const generateOffers = async (count, titles, categories, sentences) => {
+const generateOffers = async (count, titles, categories, sentences, comments) => {
   return Array(count).fill({}).map(() => ({
+    id: nanoid(MAX_ID_LENGTH),
     title: titles[getRandomInt(0, titles.length - 1)],
+    category: shuffle(categories).slice(getRandomInt(0, categories.length - 1)),
     picture: getPictureFileName(getRandomInt(PictureRestrict.MIN, PictureRestrict.MAX)),
     description: shuffle(sentences).slice(SentencesRestrict.MIN, SentencesRestrict.MAX).join(` `),
     type: Object.keys(OfferType)[Math.floor(Math.random() * Object.keys(OfferType).length)],
     sum: getRandomInt(SumRestrict.MIN, SumRestrict.MAX),
-    category: shuffle(categories).slice(getRandomInt(0, categories.length - 1)),
+    comments: generateComments(getRandomInt(1, MAX_COMMENTS), comments),
   }));
 };
+
+const generateComments = (count, comments) => (
+  Array(count).fill({}).map(() => ({
+    id: nanoid(MAX_ID_LENGTH),
+    text: shuffle(comments)
+      .slice(0, getRandomInt(1, 3))
+      .join(` `),
+  }))
+);
 
 const readContent = async (filePath) => {
   try {
@@ -78,7 +93,8 @@ module.exports = {
     const titles = await readContent(FILE_TITLES_PATH);
     const categories = await readContent(FILE_CATEGORIES_PATH);
     const sentences = await readContent(FILE_SENTENCES_PATH);
-    const offers = await generateOffers(countOffer, titles, categories, sentences);
+    const comments = await readContent(FILE_COMMENTS_PATH);
+    const offers = await generateOffers(countOffer, titles, categories, sentences, comments);
     writeOffers(offers);
   }
 };
