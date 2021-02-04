@@ -5,8 +5,9 @@ const FILENAME = `mocks.json`;
 let data = null;
 
 const getMockData = async () => {
+  console.log(`data`, data);
   if (data !== null) {
-    return Promise.resolve(data);
+    return data;
   }
 
   try {
@@ -16,8 +17,7 @@ const getMockData = async () => {
     console.log(err);
     return Promise.reject(err);
   }
-
-  return Promise.resolve(data);
+  return data;
 };
 
 (async () => {

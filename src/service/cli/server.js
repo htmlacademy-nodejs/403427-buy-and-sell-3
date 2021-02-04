@@ -23,14 +23,12 @@ module.exports = {
 
     try {
       await getMockData();
-
-      app.listen(port, (err) => {
-        if (err) {
-          return console.error(`Ошибка при создании сервера`, err);
-        }
-
-        return console.info(chalk.green(`Ожидаю соединений на ${port}`));
-      });
+      try {
+        app.listen(port);
+        console.info(chalk.green(`Ожидаю соединений на ${port}`));
+      } catch (err) {
+        console.error(`Ошибка при создании сервера`, err);
+      }
 
     } catch (err) {
       console.error(`Произошла ошибка: ${err.message}`);
