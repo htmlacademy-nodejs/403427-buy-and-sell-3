@@ -61,6 +61,11 @@ const DEFAULT_CLI_COMMAND = CliCommand.HELP;
 const DEFAULT_PORT = 3000;
 const FILENAME = `mocks.json`;
 
+const Env = {
+  DEVELOPMENT: `development`,
+  PRODUCTION: `production`
+};
+
 module.exports = {
   API_PREFIX,
   SumRestrict,
@@ -82,5 +87,6 @@ module.exports = {
   DEFAULT_PORT,
   FILENAME,
   HttpCode,
-  MAX_ID_LENGTH
+  MAX_ID_LENGTH,
+  Env
 };
