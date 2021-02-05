@@ -121,10 +121,10 @@ describe(`Offers API end-to-end tests`, () => {
 
   describe(`add comment to offer`, () => {
     test(`when add comment it should return new comment id`, async () => {
-      const res = await request(app).post(`/api/offers/1/comments`).send({text: ``});
+      const res = await request(app).post(`/api/offers/1/comments`).send({text: `example`});
 
       expect(res.statusCode).toBe(HttpCode.CREATED);
-      expect(res.body).toHaveProperty(`1`);
+      expect(res.body).toHaveProperty(`text`);
     });
 
     test(`comment validator should return BAD_REQUEST on error`, async () => {
