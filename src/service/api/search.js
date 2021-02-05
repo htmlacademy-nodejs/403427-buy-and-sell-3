@@ -12,7 +12,7 @@ module.exports = (app, service) => {
     const {query = ``} = req.query;
 
     if (!query) {
-      res.status(HttpCode.INTERNAL_SERVER_ERROR).json([]);
+      res.status(HttpCode.BAD_REQUEST).json([]);
       return;
     }
 

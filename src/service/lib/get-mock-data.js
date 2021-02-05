@@ -5,7 +5,6 @@ const FILENAME = `mocks.json`;
 let data = null;
 
 const getMockData = async () => {
-  console.log(`data`, data);
   if (data !== null) {
     return data;
   }
@@ -19,14 +18,5 @@ const getMockData = async () => {
   }
   return data;
 };
-
-(async () => {
-  try {
-    const fileContent = await fs.readFile(FILENAME);
-    data = JSON.parse(fileContent);
-  } catch (err) {
-    console.log(err);
-  }
-})();
 
 module.exports = getMockData;
