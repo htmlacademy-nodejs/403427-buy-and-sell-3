@@ -17,5 +17,10 @@ build/
 # Mock файлы
 mocks.json
 
+# Директория с загруженными изображениями
+src/express/upload/img/*.*
+
+!src/express/upload/img/.gitkeep
+
 # Log файлы
 /src/service/logs/*
