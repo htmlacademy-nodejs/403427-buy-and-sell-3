@@ -36,7 +36,8 @@ const CliCommand = {
   HELP: `--help`,
   VERSION: `--version`,
   GENERATE: `--generate`,
-  SERVER: `--server`
+  SERVER: `--server`,
+  FILL: `--fill`
 };
 
 const ExitCode = {
@@ -60,11 +61,30 @@ const DEFAULT_CLI_COMMAND = CliCommand.HELP;
 
 const DEFAULT_PORT = 3000;
 const FILENAME = `mocks.json`;
+const SQL_FILE_NAME = `fill-db.sql`;
 
 const Env = {
   DEVELOPMENT: `development`,
   PRODUCTION: `production`
 };
+
+const users = [
+  {
+    email: `ivanov@example.com`,
+    passwordHash: `5f4dcc3b5aa765d61d8327deb882cf99`,
+    firstName: `Иван`,
+    lastName: `Иванов`,
+    avatar: `avatar1.jpg`
+  },
+  {
+    email: `petrov@example.com`,
+    passwordHash: `5f4dcc3b5aa765d61d8327deb882cf99`,
+    firstName: `Пётр`,
+    lastName: `Петров`,
+    avatar: `avatar2.jpg`
+  }
+];
+
 
 module.exports = {
   API_PREFIX,
@@ -79,6 +99,7 @@ module.exports = {
   FILE_TITLES_PATH,
   FILE_COMMENTS_PATH,
   MOCK_FILE_NAME,
+  SQL_FILE_NAME,
   DEFAULT_COUNT,
   ExitCode,
   CliCommand,
@@ -88,5 +109,6 @@ module.exports = {
   FILENAME,
   HttpCode,
   MAX_ID_LENGTH,
-  Env
+  Env,
+  users
 };

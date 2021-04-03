@@ -3,7 +3,8 @@
 const chalk = require(`chalk`);
 const {
   CliCommand,
-  MOCK_FILE_NAME
+  MOCK_FILE_NAME,
+  SQL_FILE_NAME
 } = require(`../../constants`);
 
 const helpText = `
@@ -15,6 +16,7 @@ const helpText = `
     ${CliCommand.HELP}:               печатает этот текст
     ${CliCommand.GENERATE} <count>    формирует файл ${MOCK_FILE_NAME}
     ${CliCommand.SERVER}   <port>     запускает http сервер
+    ${CliCommand.FILL} <count>    формирует файл ${SQL_FILE_NAME}
 `;
 
 module.exports = {
